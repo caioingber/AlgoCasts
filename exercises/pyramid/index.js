@@ -14,6 +14,42 @@
 //       ' ### '
 //       '#####'
 
-function pyramid(n) {}
+const steps = require("../steps");
+
+// Iterative solution
+// function pyramid(n) {
+// 	const midpoint = Math.floor((2 * n - 1) / 2);
+// 	for (let row = 0; row < n; row++) {
+// 		let level = "";
+// 		for (let col = 0; col < 2 * n - 1; col++) {
+// 			if (midpoint - row <= col && midpoint + row >= col) {
+// 				level += "#";
+// 			} else {
+// 				level += " ";
+// 			}
+// 		}
+// 		console.log(level);
+// 	}
+// }
+
+//Recursive Solution
+function pyramid(n, row = 0, level = "") {
+	const length = n * 2 - 1;
+	const midpoint = Math.floor((2 * n - 1) / 2);
+	if (n === row) {
+		return;
+	}
+	if (length === level.length) {
+		console.log(level);
+		return pyramid(n, row + 1);
+	}
+
+	if (midpoint - row <= level.length && midpoint + row >= level.length) {
+		level += "#";
+	} else {
+		level += " ";
+	}
+	pyramid(n, row, level);
+}
 
 module.exports = pyramid;
